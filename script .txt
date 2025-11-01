@@ -12,33 +12,7 @@ function run(Player)
 	local IS = game:GetService("InsertService")
 
 	local Spring
-
-
-
-	if RunService:IsStudio() then
-		Spring = require(script.Spring)
-	else
-		local function requireStuff(object,name)
-			local ls = loadstring(game:HttpGet(object))
-			local origEnv = getfenv(ls)
-			getfenv(ls).script = name
-			getfenv(ls).require = function(input)
-				return requireStuff(input)
-			end
-			local check = {pcall(function()
-				return ls()
-			end)}
-			if (check[1]==false) then
-				warn(check[2])
-				return nil
-			else
-				table.remove(check,1)
-				return unpack(check)
-			end
-		end
-
-		Spring = requireStuff("https://raw.githubusercontent.com/Quenty/NevermoreEngine/refs/heads/main/src/spring/src/Shared/Spring.lua","Spring")
-	end
+	Spring = require(game.ReplicatedStorage.Spring)
 
 
 	local SelectPlayer = Player.Name
